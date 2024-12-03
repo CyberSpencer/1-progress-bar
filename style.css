@@ -1,0 +1,73 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1B2541;
+    color: #F36E44;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .progress-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #3A506C;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .leaf-icon {
+    font-size: 3rem;
+  }
+  
+  .badge {
+    background-color: #F36E44;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    margin-top: 10px;
+  }
+  
+  .progress-bar-container {
+    position: relative;
+    margin: 20px 0;
+  }
+  
+  .progress-bar {
+    height: 20px;
+    background: linear-gradient(90deg, #F36E44, #5AC0BE);
+    border-radius: 10px;
+    width: 0;
+    transition: width 2s ease-out;
+  }
+  
+  .milestones {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: #5AC0BE;
+    margin-top: 5px;
+  }
+  
+  .progress-info {
+    margin: 20px 0;
+    font-size: 1.2rem;
+  }
+  
+  .counter, .message-counter {
+    margin: 5px 0;
+  }
+  
+  .goal-tracker {
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #5AC0BE;
+  }
