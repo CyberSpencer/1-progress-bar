@@ -1,4 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // Immediate test logs to verify console is working
+    console.log("=== Progress Tracker Debug Logs ===");
+    console.log("Script loaded at:", new Date().toLocaleString());
+    console.log("Current timezone:", Intl.DateTimeFormat().resolvedOptions().timeZone);
+
     // =========================
     // 1) DOM Element References
     // =========================
@@ -7,6 +12,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const counter = document.querySelector(".counter");
     const messageCounter = document.querySelector(".message-counter");
     const progressBar = document.querySelector(".progress-bar");
+  
+    // Log DOM elements to verify they're found
+    console.log("DOM Elements found:", {
+        counter: !!counter,
+        messageCounter: !!messageCounter,
+        progressBar: !!progressBar
+    });
   
     // =======================
     // 2) Configuration Setup
@@ -89,10 +101,14 @@ document.addEventListener("DOMContentLoaded", () => {
         
         accumulatedMessages += messageIncrement;
         
-        // Make logs more visible with timestamps
-        const now = new Date().toLocaleTimeString();
-        console.log(`[${now}] Rate: ${messagesPerHour.toFixed(2)} msgs/hr`);
-        console.log(`[${now}] Total: ${(pastMessages + accumulatedMessages).toFixed(3)}`);
+        // Simplified, more reliable logging
+        console.log(
+            JSON.stringify({
+                time: new Date().toLocaleTimeString(),
+                rate: messagesPerHour.toFixed(2),
+                total: (pastMessages + accumulatedMessages).toFixed(3)
+            })
+        );
         
         updateDisplay();
         setTimeout(simulateMessages, 1000);
@@ -109,4 +125,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // (C) Start simulating real-time growth
     simulateMessages();
+
+    // Log initialization
+    console.log("Starting simulation with:", {
+        startDate: startDate.toLocaleString(),
+        startingMessages,
+        pastMessages
+    });
 });
