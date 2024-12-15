@@ -2,6 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // =========================
     // 1) DOM Element References
     // =========================
+    console.log("Progress Tracker Initialized"); // Initial test log
+    
     const counter = document.querySelector(".counter");
     const messageCounter = document.querySelector(".message-counter");
     const progressBar = document.querySelector(".progress-bar");
@@ -83,12 +85,14 @@ document.addEventListener("DOMContentLoaded", () => {
     // =========================================
     function simulateMessages() {
         const messagesPerHour = getHourlyRate(new Date());
-        const messageIncrement = messagesPerHour / 3600; // 3600 seconds in an hour
+        const messageIncrement = messagesPerHour / 3600;
         
         accumulatedMessages += messageIncrement;
         
-        console.log(`Current rate: ${messagesPerHour.toFixed(2)} msgs/hr`);
-        console.log(`Accumulated since load: ${accumulatedMessages.toFixed(3)}`);
+        // Make logs more visible with timestamps
+        const now = new Date().toLocaleTimeString();
+        console.log(`[${now}] Rate: ${messagesPerHour.toFixed(2)} msgs/hr`);
+        console.log(`[${now}] Total: ${(pastMessages + accumulatedMessages).toFixed(3)}`);
         
         updateDisplay();
         setTimeout(simulateMessages, 1000);
