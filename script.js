@@ -5,8 +5,10 @@ document.addEventListener("DOMContentLoaded", () => {
   
     const startDate = new Date('2024-12-14T16:00:00-05:00'); // December 14th, 2024 at 4PM ET
     const startingMessages = 17358; // Initial count as of start date
-    let accumulatedMessages = 0;
     const goalTrees = 100;
+    
+    let pastMessages = 0;          // sum of historical messages from startDate to now
+    let accumulatedMessages = 0;   // "live" increments after the page loads
     
     function getHourlyRate(dateObj) {
         const etTime = dateObj.toLocaleString("en-US", {
@@ -30,27 +32,24 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    function calculateTotalMessages() {
+    function preCalculateHistory() {
+        // Called once at load to compute total from startDate to now
         const now = new Date();
-        if (now < startDate) {
-            return startingMessages;
-        }
+        if (now < startDate) return startingMessages;
 
-        let totalMessages = startingMessages;
+        let total = startingMessages;
         const tempDate = new Date(startDate);
-        
-        // Walk through each hour from startDate to now
+
         while (tempDate < now) {
-            totalMessages += getHourlyRate(tempDate);
-            // Move forward by one hour
+            total += getHourlyRate(tempDate);
             tempDate.setHours(tempDate.getHours() + 1);
         }
-        
-        return Math.floor(totalMessages);
+
+        return Math.floor(total);
     }
   
     function updateDisplay() {
-        const totalMessages = calculateTotalMessages() + Math.floor(accumulatedMessages);
+        const totalMessages = pastMessages + Math.floor(accumulatedMessages);
         const trees = Math.floor(totalMessages / 1000);
         
         document.querySelector(".tree-count").textContent = trees;
@@ -70,6 +69,10 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(simulateMessages, 1000);
     }
   
+    // 1) Compute the past total once
+    pastMessages = preCalculateHistory();
+
+    // 2) Start the live updates
     updateDisplay();
     simulateMessages();
 });

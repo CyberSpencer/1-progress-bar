@@ -1,6 +1,6 @@
 # 1% For The Planet Progress Tracker
 
-A real-time visualization tracking AI Integration's™ commitment to environmental sustainability through our "1% For The Planet" initiative. For every 1,000 messages processed through our systems, we plant one tree, with a goal of 100 trees by 2026.
+A real-time visualization tracking AI Integration's™ commitment to environmental sustainability through our "1% For The Planet" initiative. For every 1,000 user messages processed through our systems, we plant one tree, with a goal of 100 trees by 2026.
 
 ## Overview
 
