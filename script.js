@@ -3,11 +3,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const messageCounter = document.querySelector(".message-counter");
     const progressBar = document.querySelector(".progress-bar");
   
-    let messages = 17358; // Initial message count
-    let trees = Math.floor(messages / 1000); // Trees already planted
-    const goalTrees = 100; // Goal of 100 trees planted
-    let accumulatedMessages = 0; // Track partial messages
-  
+    const startDate = new Date('2024-12-15T16:00:00-05:00'); // December 15th, 2024 at 4PM ET
+    const startingMessages = 17358; // Initial count as of start date
+    let accumulatedMessages = 0;
+    const goalTrees = 100; // Re-adding this constant as it's needed for progress calculation
+    
     function getHourlyRate() {
         // Get time in Eastern Time (ET)
         const etTime = new Date().toLocaleString("en-US", {
@@ -30,44 +30,41 @@ document.addEventListener("DOMContentLoaded", () => {
             return Math.random() * (5 - 2 + 1) + 2; // 2-5 messages per hour
         }
     }
+
+    function calculateTotalMessages() {
+        const now = new Date();
+        const elapsedTime = now - startDate; // milliseconds
+        const elapsedDays = elapsedTime / (1000 * 60 * 60 * 24);
+        const averageMessagesPerDay = 308; // Our established average
+        
+        return startingMessages + Math.floor(elapsedDays * averageMessagesPerDay);
+    }
   
     function updateDisplay() {
-      document.querySelector(".tree-count").textContent = trees;
-      document.querySelector(".message-count").textContent = Math.floor(messages).toLocaleString();
-  
-      // Update progress bar and percentage
-      const progressPercent = Math.min((trees / goalTrees) * 100, 100);
-      progressBar.style.width = `${progressPercent}%`;
-      document.querySelector(".progress-percentage").textContent = Math.round(progressPercent);
+        const totalMessages = calculateTotalMessages() + Math.floor(accumulatedMessages);
+        const trees = Math.floor(totalMessages / 1000);
+        
+        document.querySelector(".tree-count").textContent = trees;
+        document.querySelector(".message-count").textContent = totalMessages.toLocaleString();
+    
+        const progressPercent = Math.min((trees / goalTrees) * 100, 100);
+        progressBar.style.width = `${progressPercent}%`;
+        document.querySelector(".progress-percentage").textContent = Math.round(progressPercent);
     }
   
     function simulateMessages() {
-      // Get messages per hour based on time of day
-      const messagesPerHour = getHourlyRate();
-      // Convert to messages per second
-      const messageIncrement = messagesPerHour / 3600; // 3600 seconds in an hour
-      
-      accumulatedMessages += messageIncrement;
-      
-      // Only update messages when we have at least 1 whole message
-      if (accumulatedMessages >= 1) {
-        messages += Math.floor(accumulatedMessages);
-        accumulatedMessages = accumulatedMessages % 1; // Keep the remainder
-      }
-  
-      // Check if a new tree has been planted
-      const newTrees = Math.floor(messages / 1000);
-      if (newTrees > trees) {
-        trees = newTrees;
-      }
-  
-      updateDisplay();
-  
-      // Update every second in real time
-      setTimeout(simulateMessages, 1000);
+        const messagesPerHour = getHourlyRate();
+        const messageIncrement = messagesPerHour / 3600; // 3600 seconds in an hour
+        
+        accumulatedMessages += messageIncrement;
+        
+        updateDisplay();
+    
+        // Update every second in real time
+        setTimeout(simulateMessages, 1000);
     }
   
     // Initial update
     updateDisplay();
     simulateMessages();
-  });
+});
