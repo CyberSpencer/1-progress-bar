@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const messageCounter = document.querySelector(".message-counter");
     const progressBar = document.querySelector(".progress-bar");
   
-    const startDate = new Date('2024-12-15T16:00:00-05:00'); // December 15th, 2024 at 4PM ET
+    const startDate = new Date('2024-12-14T16:00:00-05:00'); // December 14th, 2024 at 4PM ET
     const startingMessages = 17358; // Initial count as of start date
     let accumulatedMessages = 0;
     const goalTrees = 100;

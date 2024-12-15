@@ -28,7 +28,7 @@ The visualization updates in real-time based on our message processing patterns 
 - Real-time data simulation
 - Responsive design
 - Time-zone aware calculations (EST)
-- Continuous progress tracking from December 15, 2024 date of launch of this progress tracker embed
+- Continuous progress tracking from December 14, 2024 date of launch of this progress tracker embed
 
 ## About AI Integrations
 
@@ -41,4 +41,4 @@ We're committed to sustainable technology practices. Through our 1% For The Plan
 - [Email](mailto:spencer@aiintegrations.tech)
 
 ## License
-© 2024 AI Integrations. All Rights Reserved.
+© 2024 AI Integrations™. All Rights Reserved.
