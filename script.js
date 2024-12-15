@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // These two variables track total messages:
     let pastMessages = 0; // Sum of all historical (pre-load) messages
     let accumulatedMessages = 0; // Real-time incremental messages after load
+    let lastDisplayedTotal = startingMessages; // Track last displayed count to prevent decreases
   
     // ==================
     // 3) Helper Function
@@ -60,7 +61,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // 5) Display Update Routine
     // =========================
     function updateDisplay() {
-        const totalMessages = pastMessages + Math.floor(accumulatedMessages);
+        const newTotal = pastMessages + Math.floor(accumulatedMessages);
+        // Ensure the displayed total never decreases
+        const totalMessages = Math.max(newTotal, lastDisplayedTotal);
+        lastDisplayedTotal = totalMessages;
+        
         const trees = Math.floor(totalMessages / 1000);
         
         document.querySelector(".tree-count").textContent = trees;
