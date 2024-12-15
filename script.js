@@ -62,9 +62,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // =========================
     function updateDisplay() {
         const newTotal = pastMessages + Math.floor(accumulatedMessages);
-        // Ensure the displayed total never decreases
         const totalMessages = Math.max(newTotal, lastDisplayedTotal);
         lastDisplayedTotal = totalMessages;
+        
+        const preciseTotal = (pastMessages + accumulatedMessages).toFixed(3);
+        console.log(`Precise total: ${preciseTotal}`);
         
         const trees = Math.floor(totalMessages / 1000);
         
@@ -84,6 +86,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const messageIncrement = messagesPerHour / 3600; // 3600 seconds in an hour
         
         accumulatedMessages += messageIncrement;
+        
+        console.log(`Current rate: ${messagesPerHour.toFixed(2)} msgs/hr`);
+        console.log(`Accumulated since load: ${accumulatedMessages.toFixed(3)}`);
+        
         updateDisplay();
         setTimeout(simulateMessages, 1000);
     }
