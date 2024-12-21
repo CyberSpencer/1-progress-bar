@@ -1,9 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Immediate test logs to verify console is working
-    console.log("=== Progress Tracker Debug Logs ===");
-    console.log("Script loaded at:", new Date().toLocaleString());
-    console.log("Current timezone:", Intl.DateTimeFormat().resolvedOptions().timeZone);
-
+    // Remove most console logs, keep only essential ones
+    const DEBUG = false; // Toggle for development
+    
     // =========================
     // 1) DOM Element References
     // =========================
@@ -79,17 +77,23 @@ document.addEventListener("DOMContentLoaded", () => {
         const totalMessages = Math.max(newTotal, lastDisplayedTotal);
         lastDisplayedTotal = totalMessages;
         
-        const preciseTotal = (pastMessages + accumulatedMessages).toFixed(3);
-        console.log(`Precise total: ${preciseTotal}`);
+        // Only log if debugging
+        if (DEBUG) {
+            console.log(`Precise total: ${(pastMessages + accumulatedMessages).toFixed(3)}`);
+        }
         
         const trees = Math.floor(totalMessages / 1000);
         
-        document.querySelector(".tree-count").textContent = trees;
-        document.querySelector(".message-count").textContent = totalMessages.toLocaleString();
-    
+        // Cap progress at 100%
         const progressPercent = Math.min((trees / goalTrees) * 100, 100);
-        progressBar.style.width = `${progressPercent}%`;
-        document.querySelector(".progress-percentage").textContent = Math.round(progressPercent);
+        
+        // Batch DOM updates
+        requestAnimationFrame(() => {
+            document.querySelector(".tree-count").textContent = trees;
+            document.querySelector(".message-count").textContent = totalMessages.toLocaleString();
+            progressBar.style.width = `${progressPercent}%`;
+            document.querySelector(".progress-percentage").textContent = Math.round(progressPercent);
+        });
     }
   
     // =========================================
@@ -97,21 +101,23 @@ document.addEventListener("DOMContentLoaded", () => {
     // =========================================
     function simulateMessages() {
         const messagesPerHour = getHourlyRate(new Date());
-        const messageIncrement = messagesPerHour / 3600;
+        // Update every 5 seconds instead of every second
+        const intervalInSeconds = 5;
+        const messageIncrement = messagesPerHour / (3600 / intervalInSeconds);
         
         accumulatedMessages += messageIncrement;
         
-        // Simplified, more reliable logging
-        console.log(
-            JSON.stringify({
+        // Minimal logging only when DEBUG is true
+        if (DEBUG) {
+            console.log({
                 time: new Date().toLocaleTimeString(),
                 rate: messagesPerHour.toFixed(2),
                 total: (pastMessages + accumulatedMessages).toFixed(3)
-            })
-        );
+            });
+        }
         
         updateDisplay();
-        setTimeout(simulateMessages, 1000);
+        setTimeout(simulateMessages, intervalInSeconds * 1000);
     }
   
     // ===================================
