@@ -1,94 +1,101 @@
-body {
+/* Reset and ensure transparency */
+html, body {
     font-family: Arial, sans-serif;
-    background-color: #0D1117;
+    background: transparent !important;
     color: #ffffff;
     text-align: center;
     margin: 0;
     padding: 0;
-  }
-  
-  .progress-container {
+}
+
+/* Make container fully transparent */
+.progress-container {
     max-width: 800px;
     margin: 50px auto;
     padding: 40px;
-    background-color: rgba(22, 27, 34, 0.9);
+    background: transparent;
     border-radius: 24px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-  }
-  
-  header {
+}
+
+/* Rest of the styles remain the same but ensure no solid backgrounds */
+.progress-info {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 40px;
-  }
-  
-  .leaf-icon {
-    font-size: 2rem;
-    color: #4ADE80;
-    margin-bottom: 10px;
-  }
-  
-  .badge {
-    background-color: #4ADE80;
-    color: #0D1117;
+    justify-content: center;
+    margin: 30px 0;
+    background: linear-gradient(
+        90deg, 
+        rgba(74, 222, 128, 0.1),
+        rgba(34, 211, 238, 0.1)
+    );
+    padding: 12px 24px;
+    border-radius: 50px;
+    display: inline-flex;
+}
+
+/* Update badge to be more visible against any background */
+.badge {
+    background-color: rgba(74, 222, 128, 1);
+    color: #ffffff;
     padding: 12px 24px;
     border-radius: 50px;
     font-size: 1.1rem;
     font-weight: bold;
-  }
-  
-  .progress-bar-container {
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.leaf-icon {
+    font-size: 2rem;
+    color: #4ADE80;
+    margin-bottom: 10px;
+}
+
+.progress-bar-container {
     position: relative;
     margin: 40px 0;
-  }
-  
-  .progress-bar {
+}
+
+.progress-bar {
     height: 8px;
     background: linear-gradient(90deg, #4ADE80, #22D3EE);
     border-radius: 4px;
     width: 0;
     transition: width 2s ease-out;
-  }
-  
-  .milestones {
+}
+
+.milestones {
     display: flex;
     justify-content: space-between;
     font-size: 1rem;
     color: #ffffff;
     margin-top: 10px;
-  }
-  
-  .progress-info {
-    display: flex;
-    justify-content: center;
-    margin: 30px 0;
-    background: linear-gradient(90deg, rgba(74, 222, 128, 0.2), rgba(34, 211, 238, 0.2));
-    padding: 12px 24px;
-    border-radius: 50px;
-    display: inline-flex;
-  }
-  
-  .counter, .message-counter {
+}
+
+.counter, .message-counter {
     font-size: 1.1rem;
     padding: 0 12px;
     color: #ffffff;
-  }
-  
-  .counter {
+}
+
+.counter {
     border-right: 1px solid rgba(255, 255, 255, 0.1);
-  }
-  
-  .tree-count {
+}
+
+.tree-count {
     color: #4ADE80;
-  }
-  
-  .message-count {
+}
+
+.message-count {
     color: #22D3EE;
-  }
-  
-  .goal-tracker {
+}
+
+.goal-tracker {
     margin-top: 30px;
     font-size: 1.2rem;
     color: #99bfe8;
-  }
+}
