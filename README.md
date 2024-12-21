@@ -21,14 +21,17 @@ The visualization updates in real-time based on our message processing patterns 
 
 ### Technologies
 - HTML5
-- CSS3
-- JavaScript
+- CSS3 (with transparent background for seamless embedding)
+- Vanilla JavaScript
 
 ### Features
 - Real-time data simulation
-- Responsive design
-- Time-zone aware calculations (EST)
-- Continuous progress tracking from December 14, 2024 date of launch of this progress tracker embed
+- Transparent design for iframe embedding
+- Gradient progress bar with milestones
+- Time-zone aware calculations (ET)
+- Continuous progress tracking from December 14, 2024
+- Color-coded message and tree counters
+- Responsive layout with clean typography
 
 ## About AI Integrations
 
